@@ -4,23 +4,21 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - 'docs/analisis/**'   # Evita loops al actualizar MD
 
 jobs:
   analizar:
     runs-on: ubuntu-latest
+
     steps:
+      # 1️⃣ Hacer checkout del repo
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Llamar Azure Function
-        uses: actions/http-client@v2
-        with:
-          url: ${{ secrets.AZURE_FUNCTION_URL }}
-          method: POST
-          headers: |
-            Content-Type: application/json
-          body: |
-            {
-              "repo": "${{ github.repository }}",
-              "branch": "${{ github.ref_name }}"
-            }
+      # 2️⃣ Llamar Azure Function
+      - name: Llamar Azure Function para análisis
+        run: |
+          curl -X POST "${{ secrets.AZURE_FUNCTION_URL }}" \
+            -H "Content-Type: application/json" \
+            -d "{\"repo\": \"${{ github.repository }}\", \"branch\": \"${{ github.ref_name }}\"}"
