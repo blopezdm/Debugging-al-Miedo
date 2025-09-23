@@ -3,6 +3,11 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# Carpetas de compilación de Visual Studio
+bin/
+obj/
+.vs/
+
 # User-specific files
 *.rsuser
 *.suo
