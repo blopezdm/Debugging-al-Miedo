@@ -10,7 +10,9 @@ on:
 jobs:
   analizar:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: write 
+      
     steps:
   
       # Llamar Azure Function
