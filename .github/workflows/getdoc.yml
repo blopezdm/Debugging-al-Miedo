@@ -12,11 +12,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Hacer checkout del repo
-      - name: Checkout repo
-        uses: actions/checkout@v3
-
-      # 2️⃣ Llamar Azure Function
+  
+      # Llamar Azure Function
       - name: Llamar Azure Function para análisis
         run: |
           curl -X POST "${{ secrets.AZURE_FUNCTION_URL }}" \
